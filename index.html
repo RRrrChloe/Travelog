@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xixi is traveling</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <!-- 全局滤镜定义（不会显示在页面上） -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <filter id="water">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.002 0.002"
+          numOctaves="2"
+          seed="2"
+          result="noise"
+        >
+          <animate
+            attributeName="baseFrequency"
+            values="0.012 0.02; 0.02 0.035; 0.012 0.02"
+            dur="20s"
+            repeatCount="indefinite"
+          />
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" />
+      </filter>
+    </svg>
+  </body>
+</html>

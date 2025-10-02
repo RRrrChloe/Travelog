@@ -1,0 +1,218 @@
+:root{
+  --bg:#f7fafc; --card:#fff; --text:#1f2937;
+  --muted:#6b7280; --brand:#3b82f6; --shadow:0 8px 24px rgba(0,0,0,.08);
+}
+
+body {
+  overflow-x: hidden;
+  background:var(--bg);
+  color:var(--text)
+}
+
+.mainpage {
+  max-width: 1400px;
+  background-color: var(--card);
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.mainpage .title-frame{
+  position: relative;
+  height: clamp(200px, 30vh, 300px); 
+  overflow: hidden; 
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  justify-content: center;
+  isolation: isolate;
+}
+
+.title-frame .wrapper img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* 保持比例铺满 */
+  display: block;
+  border-radius: inherit;
+}
+
+.title-frame .wrapper {
+  position: absolute;
+  inset: 0;                
+  border-radius: inherit;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.img-normal {
+  display: block;
+  width: 100%;
+}
+.title-frame .img-wavy{
+  filter: url(#water);
+  -webkit-mask-image: linear-gradient(to top, #000 45%, transparent 0);
+  mask-image: linear-gradient(to top, #000 45%, transparent 0);
+}
+
+.title-frame .title {
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative; 
+  text-align: center;
+  width: fit-content;
+  z-index: 3;
+  color: #fff;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,.35);
+}
+
+.title-frame::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index: 1;                  /* 盖在图上、在字下 */
+  pointer-events:none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.25) 55%,
+    rgba(0,0,0,.40) 100%
+  );
+}
+
+.mainpage .outerbanks {
+  font-weight: 700;
+}
+
+.mainpage .nc {
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 20px;
+}
+
+.chip{
+  margin: 6px;
+  border-radius:999px;
+  border:1px solid #e5e7eb;
+  background:#fff
+}
+
+.chip.is-active{
+  background:var(--brand);
+  color:#fff;
+  border-color:transparent
+}
+
+.picture-title, .map-title {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: var(--text);
+  padding-top: 10px;
+}
+
+.picture-frame {
+  background: #ffffff;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.polaroid {
+  width: 250px; 
+  height: 320px;
+  background:var(--card);
+  padding: 10px 10px 24px;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  display: inline-block;
+  text-align: center;
+  transition: transform .2s ease, box-shadow .2s ease;
+  margin: 4px;
+}
+
+.polaroid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
+}
+
+.polaroid img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  gap: 4px;
+}
+
+.polaroid.is-active{ 
+  outline:2px solid var(--brand); 
+  outline-offset:2px 
+}
+
+.caption {
+  margin-top: 8px;
+  text-align: center;
+  font-size: medium;
+  color: #333; 
+ }
+
+.caption .polaroid-title{ 
+  font-weight:700; 
+  font-size:16px; 
+  line-height:1.35; 
+  margin-top:10px;
+}
+
+.caption .date {
+  font-size: medium;
+  color: var(--muted);
+  text-align: center;
+  position: relative;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  gap: 28px;
+  align-items: start;
+}
+
+.left {
+  display: grid;
+  gap: 16px;
+}
+
+.right {
+  position: sticky;
+  top: 24px;
+  /* height: fit-content; */
+}
+
+.map { 
+  background:#fff; 
+  border-radius:14px; 
+  box-shadow:var(--shadow); 
+  padding:8px; 
+  /* width: 100%; */
+  height: 520px;
+  border-radius: 10px;
+}
+
+/* 响应式：手机时改为上下 */
+@media (max-width: 900px) {
+  .content {
+    grid-template-columns: 1fr;  /* 变成一列 */
+  }
+  .right {
+    position: static;            /* 地图不再 sticky，正常排在下方 */
+  }
+}
