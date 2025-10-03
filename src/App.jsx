@@ -3,10 +3,8 @@ import "leaflet/dist/leaflet.css";
 import "./index.css";
 import Map from "./map.jsx";
 
-/** 小工具：把 src/assets 下的文件名转换成打包后的 URL */
 const asset = (file) => new URL(`./assets/${file}`, import.meta.url).href;
 
-/** 景点与美食：把原来的 src:'/image/xxx.JPG' 改为 file:'xxx.JPG' */
 const scenicPhotos = [
   { name: "Bodie Island Lighthouse", file: "lh.JPG", date: "Sep-3-2025", lat: 35.82612105339161, lng: -75.5640299888405 }, 
   { name: "Jockey's Ridge State Park", file: "park2.JPG", date: "Sep-3-2025", lat: 35.985186058174605, lng: -75.64505415873117 },
@@ -21,7 +19,6 @@ const foodPhotos = [
 ];
 
 export default function App() {
-  // 地图点数据（跟你原来一致）
   const scenicSpots = scenicPhotos.map(({ id, name, lat, lng }) => ({
     id: id ?? `s-${name}`,
     name,
@@ -45,7 +42,6 @@ export default function App() {
     <div className="mainpage">
       <div className="title-frame">
         <div className="wrapper">
-          {/* 头图：用 asset() 生成正确 URL */}
           <img src={asset("bg.JPG")} className="img-normal" alt="bg" />
           <img src={asset("bg.JPG")} className="img-wavy" alt="bg" />
         </div>
@@ -72,7 +68,6 @@ export default function App() {
                 onMouseEnter={() => setHoverPoint(p)}
                 onMouseLeave={() => setHoverPoint(null)}
               >
-                {/* 这里用 asset(p.file) */}
                 <img src={asset(p.file)} alt={p.name} />
                 <figcaption className="caption">
                   <div className="polaroid-title">{p.name}</div>
